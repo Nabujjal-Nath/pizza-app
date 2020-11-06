@@ -10,6 +10,7 @@ function initRoutes(app){
     app.get('/register',authControl().register);
     app.get('/cart',cartControl().index);
     app.post('/update-cart',cartControl().update);
+    app.post('/register',authControl().postRegister);
     
     }
     
