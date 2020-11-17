@@ -24,12 +24,7 @@ connection.once('open',()=>{
     console.log('Connection failed...')
 });
 
-//passport config
-const passportInit=require('./app/config/passport')
-passportInit(passport)
 
-app.use(passport.initialize())
-app.use(passport.session())
 
 //Session Store
 const mongoStore = new MongoDBStore({
@@ -46,6 +41,14 @@ app.use(session({
     cookie:{ maxAge : 1000 * 24 * 60 *60}
 }))
 
+
+//passport config
+const passportInit=require('./app/config/passport')
+passportInit(passport)
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(flash());
 
 //assets
@@ -56,6 +59,7 @@ app.use(express.urlencoded({extended:false}))
 app.use((req,res,next)=>{
    
     res.locals.session=req.session
+    res.locals.user=req.user
     next()
 })
 
