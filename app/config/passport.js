@@ -8,7 +8,7 @@ function init(passport){
         //check if email exists
         const user=await User.findOne({email:email})
         if(!user){
-            return done(null,false,{message:'No user with wthis mail'})
+            return done(null,false,{message:'No user with this mail'})
         }
 
         bcrypt.compare(password,user.password).then(match=>{
